@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const VerticalCard = ({data}) => {
@@ -13,28 +14,42 @@ const VerticalCard = ({data}) => {
     //     ]
     // }
   return (
-    <div className={`px-2 py-3 bg-white`}>
-        <h1 className={`font-semibold text-lg`}>{data.title}</h1>
-        <div className={`grid grid-cols-2 gap-2`}>
+    <div className={`px-3 py-4 bg-white border w-fit flex flex-col gap-5 max-w-[290px] min-w-[200px] items-center justify-between`}>
+        <h1 className={`font-semibold text-xl`}>{data.title || "hey this is title"}</h1>
+        <div className={`grid grid-cols-2 gap-x-2 gap-y-6 justify-between border-red-600  box-border`}>
             {data.images.map((item,ind)=>{
                 return (
                     <div key={ind}>
-                        <Image 
+                       <div 
+                       style={{
+                        width:"130px",
+                        height:"110px",
+                        overflow:"hidden"
+                       }}
+                       >
+                       <Image 
                         src={item.url}
-                        width={30}
-                        height={30}
+                        width={100}
+                        height={200}
                         alt='product'
-                        style={{width:"auto" , height:"auto"}}
+                        objectFit='contain'
+                        style={{width:"100%" , height:"100%" ,}}
+                        className={`transform scale-x-125`}
                         />
-        <span>
+                       </div>
+        <span className={`text-xs`} >
             {item.caption}
         </span>
                     </div>
                 )
             })}
         </div>
+
+        <Link href={"/"} className={`text-sm text-[#288798] mr-auto mt-auto`}>
+          {data.link_text}
+        </Link>
     </div>
   )
 }
 
-export default VerticalCard
+export default VerticalCard;

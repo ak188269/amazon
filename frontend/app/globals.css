@@ -28,3 +28,10 @@ padding: 0px;
 display: flex;
 
 }
+.card-page{
+    background: linear-gradient(to bottom , transparent 0%,  #E3E6E6 20%);
+}
+
+body{
+    background-color: #E3E6E6;
+}

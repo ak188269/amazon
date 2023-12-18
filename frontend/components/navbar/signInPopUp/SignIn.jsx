@@ -5,7 +5,7 @@ export const SignIn = () => {
   return (
    <>
     {/* --------- sign in pop on hover --------- */}
-    <div className="bg-white flex-col gap-2 p-3 text-xs items-center rounded-sm  mt-5 absolute top-[30px] left-[-15px] border hidden" id='signin-popup' style={{minWidth:"max-content"}}>
+    <div className="bg-white flex-col gap-2 p-3 text-xs items-center rounded-sm  mt-5 absolute top-[30px] left-[-15px] border hidden z-10" id='signin-popup' style={{minWidth:"max-content"}}>
         <div className={`${styles.triangle} w-[20px] h-[10px]  absolute top-[-10px] bg-white`} >
 
         </div>

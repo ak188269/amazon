@@ -1,0 +1,12 @@
+.select_category{
+    
+    appearance: none;
+    --webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("/images/navbar/select_arrow.svg");
+    background-repeat: no-repeat;
+    background-position: 90% center;
+    background-color: #E6E6E6;
+    padding: 5px;
+
+}

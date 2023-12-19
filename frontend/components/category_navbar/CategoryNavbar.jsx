@@ -32,9 +32,10 @@ const CategoryNavbar = () => {
 <div className='ml-auto cursor-pointer'>
     <Image
     src={"/images/category_navbar/shoping_made_easy.jpg"}
-    width={400}
+    width={450}
     height={20}
-    // style={{width:"100%"}}
+    alt='shoping made easy'
+    style={{ height:"auto"}}
     />
 </div>
     </div>

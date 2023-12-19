@@ -32,7 +32,6 @@ const VerticalCard = ({data}) => {
                         width={100}
                         height={200}
                         alt='product'
-                        objectFit='contain'
                         style={{width:"100%" , height:"100%" ,}}
                         className={`transform scale-x-125`}
                         />

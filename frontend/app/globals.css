@@ -35,3 +35,22 @@ display: flex;
 body{
     background-color: #E3E6E6;
 }
+
+.shimmer-effect{
+    background: linear-gradient(to right, rgb(201, 200, 200) 0%, rgb(216, 215, 215) 70%);
+    animation: shimmer 1.4s linear infinite;
+    background-repeat: no-repeat;
+    background-size: 50%;
+
+   
+
+}
+
+@keyframes shimmer {
+    from{
+        background-position: -300%;
+    }
+    to{
+        background-position: 300%;
+    }
+}

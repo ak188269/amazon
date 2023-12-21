@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import './globals.css'
+import ProductProvider from '@/providers/ProductProvider'
 
 
 export const metadata = {
@@ -10,11 +11,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
-        {/* <link rel="shortcut icon" href="i" type="image/x-icon" /> */}
-        <title>Hello</title>
-      </Head>
-      <body>{children}</body>
+
+      <body>
+        <ProductProvider>
+
+        {children}
+
+        </ProductProvider>
+      
+      </body>
     </html>
   )
 }

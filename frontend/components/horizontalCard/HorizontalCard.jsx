@@ -1,34 +1,30 @@
 "use client"
 import React, { useEffect, useState, useRef } from 'react';
-import axios from 'axios';
+import { getProductByCategory } from '@/services/product';
 
 const HorizontalCard = ({ category }) => {
-  const [loading , setLoading] = useState(true);
+  const url = `https://dummyjson.com/products/category/${category}`;
   const [imageLoading , setImageLoading] = useState(true);
+  const [loading , setLoading] = useState(true);
   const [product, setProduct] = useState([]);
+  const [error , setError] = useState(false);
   const cardRef = useRef(null);
 
-  const getProductByCategory = async () => {
-    try {
-      const url = `https://dummyjson.com/products/category/${category}`;
-      const { data } = await axios.get(url);
-      setProduct(data.products);
-        setLoading(false)
-
-    } catch (err) {
-      console.error("Error getting product by category ", err.message);
-    }
-  };
-
   const lazyLoadCallback = (entries,observer) => {
-    entries.forEach((entry) => {
+    entries.forEach(async (entry) => {
       if (entry.isIntersecting) {
-        // Perform actions (e.g., API call) when the component is in view
-        getProductByCategory();
+        const [response , error] = await getProductByCategory(category,'images');
+        setLoading(false);
+        if(error){
+          setError(true);
+          return;
+        }
+        setProduct(response.products);
         observer.unobserve(entry.target);
       }
     });
   };
+
 
   useEffect(() => {
     const options = {
@@ -69,6 +65,7 @@ const HorizontalCard = ({ category }) => {
       </div>
       </>
     ) : 
+    error ? <div className='text-red-500 text-sm'>Oops ! Error getting data 😓</div> :
     (
       <>
       <h1 className='text-2xl font-bold'>Best seller in {category}</h1>

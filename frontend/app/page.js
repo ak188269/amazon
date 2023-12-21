@@ -5,6 +5,7 @@ import HorizontalCard from '@/components/horizontalCard/HorizontalCard'
 import Navbar from '@/components/navbar/Navbar'
 import VerticalCard from '@/components/verticalCard/VerticalCard'
 import data from '@/constants/data'
+import { useEffect } from 'react'
 
 
 export default function Home() {
@@ -31,6 +32,10 @@ export default function Home() {
     "motorcycle",
     "lighting"
   ];
+
+  useEffect(()=>{
+    console.log("useEffect")
+  },[])
   return (
    <>
  <main>

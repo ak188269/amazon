@@ -19,6 +19,10 @@ module.exports = {
       'xs': '425px',
       ...defaultTheme.screens,
     },
+    backgroundColor: theme => ({
+           ...theme('colors'),
+          'loading' : '#cecdcd'
+            })
   },
   plugins: [],
 }

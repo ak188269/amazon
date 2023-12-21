@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import './globals.css'
 import ProductProvider from '@/providers/ProductProvider'
+import CategoryNavbar from '@/components/category_navbar/CategoryNavbar'
+import Navbar from '@/components/navbar/Navbar'
 
 
 export const metadata = {
@@ -14,7 +16,8 @@ export default function RootLayout({ children }) {
 
       <body>
         <ProductProvider>
-
+        <Navbar/>
+        <CategoryNavbar/>
         {children}
 
         </ProductProvider>

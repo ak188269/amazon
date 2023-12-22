@@ -23,10 +23,10 @@ const getProductByCategory = async (category , requiredData="") => {
   return await fetchData(productAxios,url);
 }
 
-const getSingleProduct = async (id , requiredData="") =>{
+const getSingleProductById = async (id , requiredData="") =>{
   const url = `${process.env.NEXT_PUBLIC_SINGLE_PRODUCT_API}/${id}?select=${requiredData}`;
   return await fetchData(productAxios,url);
 }
 
 
-export { getAllProduct ,getProductByCategory  , getSingleProduct};
+export { getAllProduct ,getProductByCategory  , getSingleProductById};

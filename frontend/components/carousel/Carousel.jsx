@@ -37,7 +37,7 @@ const Carousel = () => {
   },[]);
 
   return (
-    <div className="carousel relative">
+    <div className="carousel relative  overflow-hidden">
       <div className="carousel-container" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
         {items.map((item,ind) => (
           <div key={ind} className="carousel-item" >

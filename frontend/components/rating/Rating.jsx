@@ -6,7 +6,8 @@ const Rating = ({productRating , totalRating = 5}) => {
   const isDecimalRating = useMemo(() => parseFloat(productRating) !== rating, []);
   return (
     <span className="flex gap-1 items-center">
-    <span className="">{productRating || "3.5"}</span>
+       <span>Rating : </span>
+    <span className="">{productRating}</span>
     <span className="flex gap-1 items-center">
       {Array.from({ length: rating }).map(
         (_ , ind) => {
@@ -38,6 +39,7 @@ const Rating = ({productRating , totalRating = 5}) => {
         }
       )}
     </span>
+   
   </span>
   )
 }

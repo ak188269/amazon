@@ -33,11 +33,11 @@ export default function Home() {
 
   return (
    <>
- <main>
+ <main className='flex flex-col gap-2'>
  
  <Carousel/>
 
- <div className={`flex flex-col gap-5 mx-auto lg:absolute lg:top-[60vh] right-0 left-0 px-4  card-page overflow-hidden   border-red-600  `}>
+ <div className={`flex flex-col gap-5 mx-auto lg:absolute lg:top-[60vh] right-0 left-0 px-2 lg:px-4  card-page overflow-hidden   border-red-600  `}>
   {/* --------- vertical card -------- */}
   <div className={`flex gap-3 flex-wrap mx-auto w-full sm:w-[95%] md:w-full xl:w-[1200px] border-0 border-red-500 sm:justify-between`}>
   {

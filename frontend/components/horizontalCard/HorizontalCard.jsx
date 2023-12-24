@@ -14,7 +14,6 @@ const HorizontalCard = ({ category }) => {
   const lazyLoadCallback = (entries,observer) => {
     entries.forEach(async (entry) => {
       if (entry.isIntersecting) {
-        console.log("intersecting");
         const [response , error] = await getProductByCategory(category,'images,title');
         setLoading(false);
         if(error){

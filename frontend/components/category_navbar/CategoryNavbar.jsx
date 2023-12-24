@@ -17,7 +17,7 @@ const CategoryNavbar = () => {
 
   return (
     <>
-      <div className={`bg-[#232F3E] p-0 flex gap-3  items-center`}>
+      <div className={`hidden lg:flex bg-[#232F3E] p-0  gap-3  items-center `}>
         <div
           className={`flex items-center gap-1 ${styles.category_menu_items} text-sm`}
         >

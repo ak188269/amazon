@@ -1,0 +1,11 @@
+.amazon_logo{
+    display: block;
+    width: 3rem;
+    min-width: 60px;
+   background-image: url("/images/navbar/amazon_logo.png");
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: center;
+   
+   /* border: 1px solid green; */
+}

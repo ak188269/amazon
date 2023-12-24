@@ -17,10 +17,11 @@ const page = () => {
         setLoading(false);
         setError(error);
         setProduct(data);
+
     }
     useEffect(()=>{
         getSingleProduct();
-    },[])
+    },[id])
 
   return (
    <>

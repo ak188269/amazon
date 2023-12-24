@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import axios from "axios";
 import fetchData from "./utils/fetchData";
 import attachInterceptor from "./utils/attachInterceptor";

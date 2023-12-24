@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import './globals.css'
 import ProductProvider from '@/providers/ProductProvider'
 import CategoryNavbar from '@/components/category_navbar/CategoryNavbar'
@@ -14,7 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
 
-      <body>
+      <body className=''>
         <ProductProvider>
         <Navbar/>
         <CategoryNavbar/>

@@ -1,7 +1,9 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./productCard.module.css";
 import Rating from "../rating/Rating";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 
 const getDiscountedPrice = (originalPrice, discountPercentage) => {
   const discount = (discountPercentage * originalPrice) / 100;
@@ -15,46 +17,69 @@ const ProductCard = ({ product }) => {
     product?.discountPercentage
   );
 
+  const {id} = useParams();
+  
+  const [quantity , setQuantity] = useState(1);
   const [imageLoading, setImageLoading] = useState(true);
+
+  const getDeliveryDate = ()=>{
+    const currentDate = new Date();
+
+    const options = { weekday: 'long', day: 'numeric', month: 'long' };
+    // setting date 2 days ahead from today
+    currentDate.setDate(currentDate.getDate()+2);
+
+    const formattedDate = currentDate.toLocaleDateString('en-IN', options);
+    
+    return formattedDate;
+  }
 
   return (
     <>
-      <div className={`flex gap-10 bg-white  p-3 px-5`}>
+      <div className={`flex flex-col mx-auto gap-6  bg-white  p-3 px-5  ${id && "lg:justify-around"} xs:w-[80%] md:w-full md:flex-row xl:w-[1240px]`}>
         {/* --------- left part containing product images ------------*/}
         {!imageLoading ? (
-          <div>
-            <div className="min-w-[250px] max-w-[350px] aspect-square ">
+          <Link className="w-full aspect-[1.2] md:w-[35%] lg:w-[30%] border-0 xs:border-red-500  " href={id ? product?.images?.[0] : `/product/${product?.id}`}>
               <img
                 src={product?.images?.[0]}
                 alt="product"
                 loading="lazy"
-                className="w-full h-full object-contain"
+                className="object-contain w-full"
               />
-            </div>
-          </div>
+          </Link>
         ) : (
           <div className="min-w-[30%] max-w-[350px] aspect-square bg-[#cecdcd] rounded">
-            <div className="shimmer-effect w-full h-full"></div>
+            <div className="shimmer-effect w-full h-full">
             <img
               src={product?.images?.[0]}
               alt="product"
               loading="lazy"
               onLoad={() => setImageLoading(false)}
             />
+            </div>
           </div>
         )}
 
         {/* ------------ right side or bottom part  product detail part -------------- */}
-        <div className={`flex flex-col gap-4 `}>
-          <span className={`text-3xl`}>{product?.title}</span>
+        <div className={`flex flex-col w-full md:w-[45%] lg:w-[45%] gap-3 lg:${id && "w-1/3"}  `}>
+          <Link className="text-2xl md:max-lg:text-xl  lg:text-3xl" href={id ? "#" : `/product/${product?.id}`}>
+          {product?.title}
+            </Link>
 
           <span className="text-[#1e8999]">Brand : {product?.brand}</span>
 
           {/* ---------- rating part ---------------- */}
           <Rating productRating={parseFloat(product?.rating)} />
+          
 
+          {/* ------- stock details ------------ */}
+          {+product?.stock == 0 ? (
+            <span className="text-red-600 text-3xl">Out of stock</span>
+            ) : (
+              <span className="text-green-700 text-lg">In stock</span>
+              )}
           {/* --------- product description------------------*/}
-          <span className="lg:max-w-[70%]">{product?.description}</span>
+          <span className="  lg:max-w-[100%]">{product?.description}</span>
 
           {/* -------------- price and discounted price------------- */}
           <span className="flex gap-2 items-center">
@@ -69,29 +94,46 @@ const ProductCard = ({ product }) => {
             </span>
           </span>
 
-          {/* ---------- emi ------- */}
-          <span>Inclusive of all taxes</span>
-          <span>
+            {/* ---------- emi ------- */}
+            <span className="hidden md:inline">Inclusive of all taxes</span>
+          <span className="hidden md:inline">
             EMI starts at ₹{~~(discountedPrice / 10)}. No Cost EMI available
           </span>
 
-          {+product?.stock == 0 ? (
-            <span className="text-red-600 text-3xl">Out of stock</span>
-          ) : (
-            <span>Total stocks : {product?.stock}</span>
-          )}
+       
+        </div>
 
-          {/* ----------- add to cart and buy now button ------ */}
 
-          <div className="flex gap-6">
-            <button className="px-5 py-2 rounded-md bg-[#FFD814] hover:bg-[#e8c30f]">
+           { id && <div className="flex gap-3 flex-col md:w-[35%] lg:w-[30%] ">
+          
+        
+
+<span className="text-[#1e8999] hidden md:inline">
+  Free delivery by {" "}
+ <span className="text-black hidden text-sm md:inline">
+{getDeliveryDate()}
+  </span>
+  </span>
+  <span className="hidden md:inline">Or fastest delivery Today. Order within 36 mins.</span>
+  <span className="text-[#1e8999] hidden md:inline">Cash on Delivery <span className="text-black">is available</span></span>
+  <span className="text-[#1e8999] hidden md:inline">7 days replacement</span>
+
+              <span>Quantity : <select onChange={(e)=>setQuantity(e.target.value)} >
+                {
+                  Array.from({length:10}).map((item,ind)=>{
+                   return <option value={ind+1} key={ind}>{ind+1}</option>
+                  })
+                }
+                </select>
+                </span>
+              {/* ----------- add to cart and buy now button ------ */}
+            <button className="px-5 py-2 rounded-3xl bg-[#FFD814] hover:bg-[#e8c30f] max-w-[100%] mt-2" onClick={()=>console.log("onclick")}>
               Add to Cart
             </button>
-            <button className="px-5 py-2 rounded-md bg-[#FA8900] hover:bg-[#c4700a]">
+            <button className="px-5 py-2 rounded-3xl bg-[#FA8900] hover:bg-[#c4700a]  max-w-[100%] ">
               Buy Now
             </button>
-          </div>
-        </div>
+          </div>}
       </div>
     </>
   );

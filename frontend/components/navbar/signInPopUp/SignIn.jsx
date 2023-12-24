@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from "./signin.module.css"
 import Link from 'next/link'
-export const SignIn = () => {
+const SignIn = () => {
   return (
    <>
     {/* --------- sign in pop on hover --------- */}
@@ -20,3 +20,5 @@ export const SignIn = () => {
    </>
   )
 }
+
+export default SignIn;

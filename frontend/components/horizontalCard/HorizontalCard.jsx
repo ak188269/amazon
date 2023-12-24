@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState, useRef } from 'react';
 import { getProductByCategory } from '@/services/product';
+import Link from 'next/link';
 
 const HorizontalCard = ({ category }) => {
   const url = `https://dummyjson.com/products/category/${category}`;
@@ -13,7 +14,7 @@ const HorizontalCard = ({ category }) => {
   const lazyLoadCallback = (entries,observer) => {
     entries.forEach(async (entry) => {
       if (entry.isIntersecting) {
-        const [response , error] = await getProductByCategory(category,'images');
+        const [response , error] = await getProductByCategory(category,'images,title');
         setLoading(false);
         if(error){
           setError(true);
@@ -48,15 +49,15 @@ const HorizontalCard = ({ category }) => {
 
   return (
   
-     <div ref={cardRef} className={`bg-white p-2 flex flex-col gap-3 `}>
+     <div ref={cardRef} className={`bg-white p-2 flex flex-col gap-3 mx-auto w-full sm:w-[95%] md:w-full xl:w-[1200px]`}>
 
    {
     loading ?    (
       <>
       <h1 className='text-2xl font-bold w-[200px] bg-[#dfdddd] h-[20px] animate-pulse rounded'></h1>
-      <div className={`flex gap-3 justify-between`}>
-        {[1,2,3,4].map((item, ind) => (
-          <div key={ind} className={`flex  items-center w-[23%] min-w-[200px]  bg-[#cecdcd] rounded relative`} style={{ aspectRatio: "1.3" }}>
+      <div className={`flex gap-4 flex-wrap mt-1 md:mt-0 lg:justify-between`}>
+        {[1,2,3,4,5].map((item, ind) => (
+          <div key={ind} className={`flex flex-col border-0  items-center w-[29%] md:w-[18%] md:justify-between  bg-[#cecdcd] rounded relative`} style={{ aspectRatio: "1.3" }}>
             
             <div className={` h-full   top-0 w-full  absolute shimmer-effect`} ></div>
           </div>
@@ -69,14 +70,14 @@ const HorizontalCard = ({ category }) => {
     (
       <>
       <h1 className='text-2xl font-bold'>Best seller in {category}</h1>
-      <div className={`flex gap-3 justify-between`}>
+      <div className={`flex gap-4 flex-wrap mt-1 md:mt-0 lg:justify-between`}>
         {product.map((item, ind) => (
-          <div key={ind} className={`flex justify-center items-center w-44 min-w-[200px]`} style={{ aspectRatio: ".9" }}>
-            <img src={item.images[0]} alt={item.title} className={`w-full h-full hover:scale-110 transition-all cursor-pointer ${imageLoading ? 'blur-sm' : 'filter-none'}`} loading='lazy' style={{ objectFit: "contain" }} onLoad={()=>{
+          <Link href={`/product/${item.id}`} key={ind} className={`flex flex-col border-0  items-center w-[29%] md:w-[18%] md:justify-between `} style={{ aspectRatio: ".9" }}>
+            <img src={item.images[0]} alt={item.title} className={`w-full h-full hover:scale-110 transition-all cursor-pointer ${imageLoading ? 'blur-sm bg-loading' : 'filter-none'} border-0 border-red-500 `} loading='lazy' style={{ objectFit: "contain" }} onLoad={()=>{
               setImageLoading(false)
             }}/>
-          </div>
-        
+            <span className='text-xs md:hidden'>{item.title }</span>
+          </Link>
         ))}
       </div>
       </>

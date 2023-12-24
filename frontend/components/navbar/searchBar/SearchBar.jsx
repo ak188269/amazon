@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./searchBar.module.css";
 import Image from "next/image";
 
-const SearchBar = ({width}) => {
+const SearchBar = ({shouldShow=true}) => {
   const Options = ["Devices", "Fashion", "Groceries", "Beauty", "Books"];
   const [selectedValue, setSelectedValue] = useState("All");
 
@@ -48,7 +48,7 @@ const SearchBar = ({width}) => {
     return 2 * width + "px";
   }
   return (
-    <div className={`flex rounded overflow-hidden  flex-grow`
+    <div className={`${shouldShow ? "flex" : "hidden"} rounded overflow-hidden  flex-grow`
     }
     
     >
@@ -72,7 +72,7 @@ const SearchBar = ({width}) => {
       <input
         type="text"
         placeholder="Search Amazon.in"
-        className={`p-2 outline-none`}
+        className={`p-0 px-2 lg:p-2 outline-none`}
         style={{flexGrow:"1"}}
       />
       <div className={`icon_container bg-[#F4BF76] flex items-center p-1 px-2 w-fit`}>

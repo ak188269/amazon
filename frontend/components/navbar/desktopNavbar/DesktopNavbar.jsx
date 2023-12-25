@@ -12,7 +12,7 @@ const DesktopNavbar = () => {
   const address = "Mumbai 400001";
 
   return (
-    <nav className="bg-[#131921] p-3 flex gap-x-6 items-center ">
+    <nav className="hidden lg:flex bg-[#131921] p-3  gap-x-6 items-center ">
 
         {/* ----------amazon logo --------- */}
       <div className="cursor_pointer">

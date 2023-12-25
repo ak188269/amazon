@@ -5,15 +5,16 @@ import Link from "next/link";
 const CategoryNavbar = () => {
   const Menu = [
   
-    { navigate_to: "/products/smartphones", name: "Mobiles" },
-    { navigate_to: "/products/laptops", name: "Laptops" },
-    { navigate_to: "/products/mens-shirts", name: "Fashion" },
-    { navigate_to: "/products/skincare", name: "Beauty" },
-    { navigate_to: "/products/lighting", name: "Electronics" },
-    { navigate_to: "/products/womens-jewellery", name: "Jewelleries" },
-    { navigate_to: "/products/groceries", name: "Kitchen" },
-    { navigate_to: "/#", name: "Amazon Pay" },
+    { navigate_to: "/products/smartphones", name: "Mobiles" ,thumbnail_url: "/images/category_navbar/mobile.jpg" },
+    { navigate_to: "/products/laptops", name: "Laptops" ,thumbnail_url: "/images/category_navbar/laptop.webp"},
+    { navigate_to: "/products/mens-shirts", name: "Fashion" ,thumbnail_url: "/images/category_navbar/fashion.jpg"},
+    { navigate_to: "/products/skincare", name: "Beauty" ,thumbnail_url: "/images/category_navbar/beauty.jfif"},
+    { navigate_to: "/products/lighting", name: "Electronics",thumbnail_url: "/images/category_navbar/electronics.jpg" , notInMobile : false},
+    { navigate_to: "/products/womens-jewellery", name: "Jewelleries" , notInMobile : false },
+    { navigate_to: "/products/groceries", name: "Grocery",thumbnail_url: "/images/category_navbar/grocery.jpg" },
+    { navigate_to: "/#", name: "Amazon Pay" ,thumbnail_url: "/images/category_navbar/amazon_pay.jfif"},
   ];
+
 
   return (
     <>
@@ -53,6 +54,31 @@ const CategoryNavbar = () => {
             style={{ height: "auto" }}
           />
         </div>
+      </div>
+
+      {/* ---------- for smaller device width < 1024 px-------- */}
+      <div className={`flex lg:hidden gap-2 overflow-x-auto ${styles.scrollbar_none} bg-white`}>
+        {
+            Menu.map((item, ind) => {
+              /// this is done because i was not having image of jwellery section if got it later then remove this if 
+              if(item.name !== "Jewelleries"){
+              return (
+                <Link
+                  href={item.navigate_to}
+                  className={`flex flex-col gap-1 h-fit p-2 border`}
+                  key={ind}
+                >
+                 <div className={`h-[3rem]`}>
+                  <img src={item.thumbnail_url} alt={item.name} className={`w-full h-full object-contain`} />
+                 </div>
+                 <span className="text-xs md:text-sm">{item.name}</span>
+                </Link>
+              );
+              }
+            })
+          
+          
+        }
       </div>
     </>
   );

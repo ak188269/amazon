@@ -9,7 +9,7 @@ const MobileNavbar = () => {
   const user = "Someone";
   const address = "Mumbai 400001";
   return (
-    <nav className="bg-[#131921] p-2 flex flex-col  gap-2  sticky  z-10 top-0">
+    <nav className="bg-[#131921] p-2 flex  lg:hidden flex-col  gap-2  sticky  z-10 top-0">
 
 {/* --------upper part ------------------- */}
 <div className="flex justify-between w-full items-center px-1">

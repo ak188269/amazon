@@ -1,12 +1,15 @@
+'use client'
+import { useCart } from '@/providers/CartProvider'
 import Image from 'next/image'
 import React from 'react'
 
-const Cart = ({number}) => {
+const Cart = () => {
+  const {cartSize} = useCart();
   return (
     <>
     <div className={`flex cursor_pointer`}>
     <div className='relative  md:w-full md:h-full'>
-        <span className={`text-[#D18324] absolute left-2 bottom-4 text-xs lg:left-4 lg:bottom-5 font-semibold  min-w-[20px] text-center`}>{number}</span>
+        <span className={`text-[#D18324] absolute left-2 bottom-4 text-xs lg:left-4 lg:bottom-5 font-semibold  min-w-[20px] text-center`}>{cartSize}</span>
     <div className={`icon_container w-[2rem] lg:w-full`}>
          <Image
            src={"/images/navbar/cart.svg"}

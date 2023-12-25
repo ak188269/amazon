@@ -1,9 +1,11 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./productCard.module.css";
 import Rating from "../rating/Rating";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { useCart } from "@/providers/CartProvider";
+import useToast from "@/hooks/useToast";
 
 const getDiscountedPrice = (originalPrice, discountPercentage) => {
   const discount = (discountPercentage * originalPrice) / 100;
@@ -21,7 +23,8 @@ const ProductCard = ({ product }) => {
   
   const [quantity , setQuantity] = useState(1);
   const [imageLoading, setImageLoading] = useState(true);
-
+  const {cart ,setCart}  = useCart();
+  const notify = useToast();
   const getDeliveryDate = ()=>{
     const currentDate = new Date();
 
@@ -33,9 +36,19 @@ const ProductCard = ({ product }) => {
     
     return formattedDate;
   }
+  const addToCart = useCallback(()=>{
+    
+    const updatedCart = [...cart , {productId : id , quantity : quantity}] ;
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+    setCart((cart)=>[...cart , {productId : id , quantity : quantity}]);
+    notify("Added to cart","success");
+  })
+
 
   return (
     <>
+    {/* <Toaster/> */}
       <div className={`flex flex-col mx-auto gap-6  bg-white  p-3 px-5  ${id && "lg:justify-around"} xs:w-[80%] md:w-full md:flex-row xl:w-[1240px]`}>
         {/* --------- left part containing product images ------------*/}
         {!imageLoading ? (
@@ -127,7 +140,7 @@ const ProductCard = ({ product }) => {
                 </select>
                 </span>
               {/* ----------- add to cart and buy now button ------ */}
-            <button className="px-5 py-2 rounded-3xl bg-[#FFD814] hover:bg-[#e8c30f] max-w-[100%] mt-2" onClick={()=>console.log("onclick")}>
+            <button className="px-5 py-2 rounded-3xl bg-[#FFD814] hover:bg-[#e8c30f] max-w-[100%] mt-2" onClick={addToCart}>
               Add to Cart
             </button>
             <button className="px-5 py-2 rounded-3xl bg-[#FA8900] hover:bg-[#c4700a]  max-w-[100%] ">

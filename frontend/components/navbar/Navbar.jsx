@@ -6,7 +6,6 @@ import MobileNavbar from './mobileNavbar/MobileNavbar';
 const Navbar = () => {
   const [isBigScreen, setIsBigScreen] = useState(true);
   const setScreenSize = useCallback(()=> {
-    console.log("screen size changed",window.innerWidth);
     if((typeof window !== 'undefined' && window.innerWidth >= 1024)){
       setIsBigScreen(true);
     }
@@ -20,9 +19,7 @@ const Navbar = () => {
     }
   },[])
 
-  useEffect(()=>{
-    console.log("screen changed ",isBigScreen);
-  },[isBigScreen])
+
   return (
     <>
     {

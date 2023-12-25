@@ -2,6 +2,8 @@ import './globals.css'
 import ProductProvider from '@/providers/ProductProvider'
 import CategoryNavbar from '@/components/category_navbar/CategoryNavbar'
 import Navbar from '@/components/navbar/Navbar'
+import CartProvider from '@/providers/CartProvider'
+import { Toaster } from 'react-hot-toast'
 
 
 export const metadata = {
@@ -14,12 +16,15 @@ export default function RootLayout({ children }) {
     <html lang="en">
 
       <body className=''>
+        <CartProvider>
         <ProductProvider>
         <Navbar/>
         <CategoryNavbar/>
+        <Toaster/>
         {children}
 
         </ProductProvider>
+        </CartProvider>
       
       </body>
     </html>

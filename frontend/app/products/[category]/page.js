@@ -9,7 +9,7 @@ const page = () => {
         
     const {category} = useParams();
 
-    const [products , setProducts] = useState({});
+    const [products , setProducts] = useState([]);
     const [error , setError] = useState(null);
     const [loading , setLoading] = useState(true);
 
@@ -18,22 +18,24 @@ const page = () => {
         const [data , error] = await getProductByCategory(category);
         setLoading(false);
         setError(error);
-        setProducts(data.products);
+        setProducts(data?.products || []);
     }
 
     useEffect(()=>{
-        console.log("useeffect");
         getAllProduct();
     },[])
+
+
 
   return (
     <div className={`flex flex-col gap-4 p-3`}>
         {
-            !loading ?     products.map((item,ind)=>{
+            (!loading) ? products.length > 0 ?   products?.map((item,ind)=>{
                     return (
                         <ProductCard product={item} key={ind}/>
                     )
                 }) 
+                : <div className='text-center text-red-500'>Product is not available</div>
            :    Array.from({length:3}).map((item,ind)=>{
                     return (
                         <ProductCardSkelton key={ind}/>

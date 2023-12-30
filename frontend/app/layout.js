@@ -4,6 +4,8 @@ import CategoryNavbar from '@/components/category_navbar/CategoryNavbar'
 import Navbar from '@/components/navbar/Navbar'
 import CartProvider from '@/providers/CartProvider'
 import { Toaster } from 'react-hot-toast'
+import CustomerProvider from '@/providers/UserProvider'
+// import UserProvider from '@/providers/userProvider'
 
 
 export const metadata = {
@@ -15,17 +17,19 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
 
-      <body className=''>
+      <body>
+        <CustomerProvider>
         <CartProvider>
         <ProductProvider>
+
         <Navbar/>
-        <CategoryNavbar/>
+        
         <Toaster/>
         {children}
 
         </ProductProvider>
         </CartProvider>
-      
+        </CustomerProvider>
       </body>
     </html>
   )

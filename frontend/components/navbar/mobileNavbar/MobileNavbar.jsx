@@ -5,8 +5,20 @@ import styles from "./mobileNavbar.module.css";
 import Image from "next/image";
 import SearchBar from "../searchBar/SearchBar";
 import Cart from "../cart/Cart";
+import { useUser } from "@/providers/UserProvider";
+import { usePathname, useSearchParams } from "next/navigation";
 const MobileNavbar = () => {
-  const user = "Someone";
+  const query = useSearchParams().toString();
+  const pathName = usePathname();
+  let returnUrl = pathName + query;
+  if(pathName =="/login"){
+    if(query){
+      returnUrl = query.split("returnUrl=")[1];
+
+    }
+  }
+  const {user} = useUser();
+  // const user = "Someone";
   const address = "Mumbai 400001";
   return (
     <nav className="bg-[#131921] p-2 flex  lg:hidden flex-col  gap-2  sticky  z-10 top-0">
@@ -15,14 +27,14 @@ const MobileNavbar = () => {
 <div className="flex justify-between w-full items-center px-1">
     {/* ----------amazon logo --------- */}
     <Link href={"/"} className="flex gap-0 cursor-pointer w-[30%] h-[1.5rem] border-0 border-red-500">
-    <Image
+    {/* <Image
             src={"/images/category_navbar/hamburger.svg"}
             width={20}
             height={15}
             alt="hamburger"
             className="icons"
             style={{ width: "auto", height: "70%" }}
-          />
+          /> */}
       <span className={`${styles.amazon_logo} ml-2 mt-1`}>
         {/* ------- in this background image of amazon will be added ----------- */}
       </span>
@@ -32,7 +44,7 @@ const MobileNavbar = () => {
 
 {/* -------- delivery part ----------- */}
   <div className="hidden flex-col text-white cursor_pointer">
-    <span className={`ml-2 text-[#C9CCCC] text-sm`} style={{}}>Deliver to {user}</span>
+    <span className={`ml-2 text-[#C9CCCC] text-sm`} style={{}}>Deliver to {user?.name || 'user'}</span>
 
     <span className={`flex`}>
       <div className={`icon_container`}>
@@ -55,8 +67,8 @@ const MobileNavbar = () => {
 <div id="right-part" className="flex gap-3 items-center">
   {/* --------- account and sign in -------- */}
   
-  <div className="flex text-white cursor_pointer gap-1 mb-1" id="account-and-sign-in">
-    <span className={`ml-2`} style={{}}>Sign in </span>
+  <Link href={`/login?returnUrl=${returnUrl}`} className="flex text-white cursor_pointer gap-1 mb-1" id="account-and-sign-in">
+    <span className={`ml-2`} style={{}}>{user?.name || "Sign in"} </span>
 
      
    
@@ -71,7 +83,7 @@ const MobileNavbar = () => {
       </div>
 
 
-   </div>
+   </Link>
   
 
 

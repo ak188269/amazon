@@ -1,4 +1,4 @@
-const postData = async (axiosInsatance, url) => {
+const postData = async (axiosInsatance, url , body) => {
     let error = null;
     let response = null;
     try {
@@ -6,7 +6,8 @@ const postData = async (axiosInsatance, url) => {
       const { data } = await axiosInsatance.post(url,body);
       response = data;
     } catch (e) {
-      error = {message : e.message , statsCode : e.response?.status | 400};
+      console.log("error: " , e.response);
+      error = {message : e.response?.data.message , statusCode : e.response?.status || 400};
     }
   
     return [response, error];

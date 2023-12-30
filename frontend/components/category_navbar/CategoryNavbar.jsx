@@ -57,7 +57,7 @@ const CategoryNavbar = () => {
       </div>
 
       {/* ---------- for smaller device width < 1024 px-------- */}
-      <div className={`flex lg:hidden gap-2 overflow-x-auto ${styles.scrollbar_none} bg-white`}>
+      <div className={`flex lg:hidden gap-2 justify-between overflow-x-auto ${styles.scrollbar_none} bg-white`}>
         {
             Menu.map((item, ind) => {
               /// this is done because i was not having image of jwellery section if got it later then remove this if 
@@ -65,7 +65,7 @@ const CategoryNavbar = () => {
               return (
                 <Link
                   href={item.navigate_to}
-                  className={`flex flex-col gap-1 h-fit p-2 border`}
+                  className={`flex flex-col gap-1 h-fit p-2 `}
                   key={ind}
                 >
                  <div className={`h-[3rem]`}>

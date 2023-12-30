@@ -29,12 +29,10 @@ display: flex;
 
 }
 .card-page{
-    background: linear-gradient(to bottom , transparent 0%,  #E3E6E6 20%);
+    background: linear-gradient(to bottom , transparent 0%,  #E3E6E6 10%);
 }
 
-body{
-    background-color: #E3E6E6;
-}
+
 
 .shimmer-effect{
     background: linear-gradient(to right, rgb(201, 200, 200) 0%, rgb(216, 215, 215) 70%);

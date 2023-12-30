@@ -1,0 +1,8 @@
+.amazon_logo{
+    display: block;
+    width: 7rem;
+   background-image: url("/images/authentication/amazon_logo.png");
+   background-size: 100% 100%;
+   background-repeat: no-repeat;
+   background-position: center;
+}

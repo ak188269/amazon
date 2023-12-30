@@ -1,21 +1,22 @@
 'use client'
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./desktopNavbar.module.css";
 import Image from "next/image";
 import SearchBar from "../searchBar/SearchBar";
 import SignIn from "../signInPopUp/SignIn";
 import Cart from "../cart/Cart";
+import { useUser } from "@/providers/UserProvider";
 
 const DesktopNavbar = () => {
-  const user = "Someone";
+  const {user} = useUser();
   const address = "Mumbai 400001";
 
   return (
-    <nav className="hidden lg:flex bg-[#131921] p-3  gap-x-6 items-center ">
+    <nav className="hidden lg:flex bg-[#131921]  p-0 px-3 gap-x-6 items-center ">
 
         {/* ----------amazon logo --------- */}
-      <div className="cursor_pointer">
+      <div className="cursor_pointer p-3">
         <Link href={"/"} className="flex justify-center">
           <span className={`${styles.amazon_logo}`}>
             {/* ------- in this background image of amazon will be added ----------- */}
@@ -25,8 +26,8 @@ const DesktopNavbar = () => {
       </div>
 
 {/* -------- delivery part ----------- */}
-      <div className="flex flex-col text-white cursor_pointer">
-        <span className={`ml-2 text-[#C9CCCC] text-sm`} style={{}}>Deliver to {user}</span>
+      <div className="flex flex-col text-white cursor_pointer py-3">
+        <span className={`ml-2 text-[#C9CCCC] text-sm`} style={{}}>Deliver to {user?.name || "user"}</span>
 
         <span className={`flex`}>
           <div className={`icon_container`}>
@@ -49,8 +50,8 @@ const DesktopNavbar = () => {
 
       {/* --------- account and sign in -------- */}
       
-      <div className="flex flex-col text-white cursor_pointer relative" id="account-and-sign-in">
-        <span className={`ml-2 text-sm`} style={{}}>Hello, { "sign in"}</span>
+      <div className="flex flex-col text-white cursor_pointer relative py-3" id="account-and-sign-in">
+        <span className={`ml-2 text-sm`} style={{}}>Hello,{user ? user?.name : "sign in"}</span>
 
         <span className={`flex items-center gap-1`}>
          
@@ -75,7 +76,7 @@ const DesktopNavbar = () => {
       
 
        {/* --------- return and orders */}
-       <div className={`flex flex-col text-white cursor_pointer `}>
+       <div className={`flex flex-col text-white cursor_pointer py-3`}>
         <span className={`text-xs`}>
           Returns
         </span>

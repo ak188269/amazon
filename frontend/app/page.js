@@ -1,4 +1,5 @@
 import Carousel from '@/components/carousel/Carousel'
+import CategoryNavbar from '@/components/category_navbar/CategoryNavbar';
 import HorizontalCard from '@/components/horizontalCard/HorizontalCard'
 import VerticalCard from '@/components/verticalCard/VerticalCard'
 import data from '@/constants/data'
@@ -33,6 +34,7 @@ export default function Home() {
 
   return (
    <>
+   <CategoryNavbar/>
  <main className='flex flex-col gap-2'>
  
  <Carousel/>

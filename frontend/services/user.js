@@ -10,6 +10,7 @@ const userAxios = attachInterceptor( axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials :true,
 }));
 
 const formDataUserAxios = attachInterceptor( axios.create({
@@ -36,5 +37,9 @@ const logout = async () =>{
     return await fetchData(userAxios , url);
 }
 
+const isUserLoggedIn = async () =>{
+  const url = `${process.env.NEXT_PUBLIC_IS_USER_LOGGED_IN_API}`;
+  return await fetchData(userAxios , url );
+}
 
-export { register  , login , logout};
+export { register  , login , logout , isUserLoggedIn};

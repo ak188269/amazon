@@ -67,7 +67,7 @@ const CartItem = ({item }) => {
   }
 </select> */}
 <div className='flex gap-3 items-center'>
-<span className='text-sm'>Quantity : {quantity}</span>
+<span className='text-sm'>Quantity : {item?.quantity}</span>
   <button className='rounded-md text-sm border border-[#a5a3a3] w-max min-w-[100px] md:min-w-[150px] p-1' onClick={deleteItem}>Delete</button>
 </div>
 </div>

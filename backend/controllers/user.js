@@ -147,11 +147,11 @@ const login = asyncErrorHandler(async function (req, res,next) {
       maxAge: 24*60*60*1000 ,
       httpOnly: true,
        sameSite: 'None',
-      secure: process.env.NODE_ENV === 'production',
+      secure:true || process.env.NODE_ENV === 'production',
     });
     const {password : pwd,resetPasswordToken , resetPasswordExpiryTime,verificationToken,verificationTokenExpiryTime, verified, ...data} = user?._doc ;
     
-    res.status(200).json({ success: true, message: "Logged in successfully", data: {...data , jwt : token} });
+    res.status(200).json({ success: true, message: "Logged in successfully", data });
   }
 );
 // ------ logout handler--------

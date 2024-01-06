@@ -20,6 +20,7 @@ app.get("/",(req, res)=>{
 })
 app.use("/api/v1/user",require("./routes/user"));
 app.use("/api/v1/cart",require("./routes/cart"));
+app.use("/api/v1/payment",require("./routes/payment"));
 app.listen(PORT,()=>{
     console.log("listening at "+PORT);
 })

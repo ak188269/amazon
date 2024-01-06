@@ -43,6 +43,7 @@ setVisible(true)
       return;
     }
     notify(response.message , "success");
+    setVisible(false)
     setUser(null);
     router.push("/");
   }

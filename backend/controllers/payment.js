@@ -3,7 +3,7 @@ const crypto = require('crypto');
 
 const asyncErrorHandler = require('../utils/asyncErrorHandler');
 const generateMerchantTransactionId = require('../utils/generateMerchantTransactionId');
-const baseUrl = "http://localhost:8080" ;
+const baseUrl = process.env.NODE_ENV == 'production'? "https://amazon-website-backend.vercel.app/" : "http://localhost:8080" ;
 
 
 // const process.env.PHONEPE_SALT_KEY = '099eb0cd-02cf-4e2a-8aca-3e6c6aff0399';

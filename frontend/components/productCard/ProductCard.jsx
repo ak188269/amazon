@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import styles from "./productCard.module.css";
 import Rating from "../rating/Rating";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useCart } from "@/providers/CartProvider";
 import useToast from "@/hooks/useToast";
@@ -22,7 +22,7 @@ const ProductCard = ({ product }) => {
   );
 
   const { id } = useParams();
-
+    const router = useRouter();
   const [quantity, setQuantity] = useState(1);
   const [imageLoading, setImageLoading] = useState(true);
   const { cart, setCart, setCartSize } = useCart();
@@ -39,13 +39,17 @@ const ProductCard = ({ product }) => {
 
     return formattedDate;
   };
-  const addItemToCart = useCallback(async () => {
+  const addItemToCart = useCallback(async (url) => {
+    // this url will tell whether it is add to cart or buy now 
     if (user) {
       const [response, error] = await addToCart(id, quantity);
       if (error) {
         notify("Error adding product try again", "error");
         setCartSize((size) => size - quantity);
         return;
+      }
+      else{
+        setCartSize((size) => size + quantity);
       }
     } else if (!user) {
       const item = { productId: product, quantity: parseInt(quantity) };
@@ -66,6 +70,8 @@ const ProductCard = ({ product }) => {
 
     // setCartSize((size) => size + parseInt(quantity));
     notify("Added to cart", "success");
+    if(url)
+    router.push(url);
   });
 
   return (
@@ -186,7 +192,7 @@ const ProductCard = ({ product }) => {
             >
               Add to Cart
             </button>
-            <button className="px-5 py-2 rounded-3xl bg-[#FA8900] hover:bg-[#c4700a]  max-w-[100%] ">
+            <button className="px-5 py-2 rounded-3xl bg-[#FA8900] hover:bg-[#c4700a]  max-w-[100%] " onClick={()=>addItemToCart("/cart")}>
               Buy Now
             </button>
           </div>

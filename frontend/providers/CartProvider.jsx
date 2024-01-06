@@ -34,6 +34,7 @@ const CartProvider = ({ children }) => {
 
     setSubTotal(subTotal);
     setCartSize(size);
+   
  }
   useEffect(() => {
     if(!user){

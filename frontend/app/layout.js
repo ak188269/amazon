@@ -7,6 +7,11 @@ import { Toaster } from 'react-hot-toast'
 import CustomerProvider from '@/providers/UserProvider'
 // import UserProvider from '@/providers/userProvider'
 
+import { PrimeReactProvider } from 'primereact/api';
+
+import "primereact/resources/themes/lara-light-cyan/theme.css";
+
+        
 
 export const metadata = {
   title: 'Amazon Clone',
@@ -18,6 +23,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
 
       <body>
+        <PrimeReactProvider>
         <CustomerProvider>
         <CartProvider>
         <ProductProvider>
@@ -30,6 +36,7 @@ export default function RootLayout({ children }) {
         </ProductProvider>
         </CartProvider>
         </CustomerProvider>
+        </PrimeReactProvider>
       </body>
     </html>
   )

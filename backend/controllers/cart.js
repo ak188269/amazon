@@ -36,6 +36,33 @@ const addToCart = asyncErrorHandler(async (req ,res , next) => {
 
 })
 
+//this will be used when user first time logins and there is product in cart saved  in local storage
+const addToCartFromLocalstorage = asyncErrorHandler(async (req ,res , next) => {
+    const {cart} = req.body ;
+
+    const userId = req.user._id ;
+    const user = await User.findById(userId) ;
+    if(!user){
+        return next(new CustomError("User does not exist",404));
+    }
+   
+    cart.forEach(async (product)=>{
+        const productId = getProductIdInMongodb(product.productId);
+         // ------- productId is converted to string otherwise they will not match ---------
+    const productIndex = user.cart.findIndex((item)=> item.productId.toString() === productId.toString());
+    if(productIndex !== -1){
+        user.cart[productIndex].quantity += parseInt(quantity);
+        await user.save();
+        return res.json({success: true, message:"Item added successfully"});
+    }
+
+    user.cart.unshift({productId, quantity});
+    })
+    await user.save();
+    return res.json({success: true, message:"Items added successfully"});
+
+})
+
 // ------------------ decrease the quantity ------------------
 const decreaseQuantityOfItem = asyncErrorHandler( async (req , res , next)=>{
     //  it is assumed that each time the quantity will be decreases by 1 
@@ -122,4 +149,4 @@ const getUserCart = asyncErrorHandler(async (req , res , next)=>{
 
 })
 
-module.exports = { addToCart , decreaseQuantityOfItem , getCartSize , getUserCart , deleteItemFromCart}
+module.exports = { addToCart , decreaseQuantityOfItem , getCartSize , getUserCart , deleteItemFromCart , addToCartFromLocalstorage}

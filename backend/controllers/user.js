@@ -84,7 +84,7 @@ const register = asyncErrorHandler ( async (req, res) => {
       maxAge: 24*60*60*1000 ,
       httpOnly: true,
        sameSite: 'None',
-      secure: process.env.NODE_ENV === 'production',
+      secure: true,
     });
     
     const {password : pwd,resetPasswordToken , resetPasswordExpiryTime,verificationToken,verificationTokenExpiryTime, verified, ...data} = user?._doc ;
@@ -147,7 +147,7 @@ const login = asyncErrorHandler(async function (req, res,next) {
       maxAge: 24*60*60*1000 ,
       httpOnly: true,
        sameSite: 'None',
-      secure:true || process.env.NODE_ENV === 'production',
+      secure:true ,
     });
     const {password : pwd,resetPasswordToken , resetPasswordExpiryTime,verificationToken,verificationTokenExpiryTime, verified, ...data} = user?._doc ;
     
@@ -158,7 +158,8 @@ const login = asyncErrorHandler(async function (req, res,next) {
 
 const logout =  asyncErrorHandler(async (req, res) => {
 
-    res.cookie("jwt", null, { maxAge: 0, httpOnly: true });
+    res.cookie("jwt", null, { maxAge: 0, httpOnly: true ,sameSite: 'None',
+    secure:true ,});
     return res.status(200).json({ success: true, message: "Logged out successfully"});
 });
 

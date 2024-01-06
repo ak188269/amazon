@@ -83,6 +83,8 @@ const register = asyncErrorHandler ( async (req, res) => {
     res.cookie("jwt", token, {
       maxAge: 24*60*60*1000 ,
       httpOnly: true,
+       sameSite: 'None',
+      secure: process.env.NODE_ENV === 'production',
     });
     
     const {password : pwd,resetPasswordToken , resetPasswordExpiryTime,verificationToken,verificationTokenExpiryTime, verified, ...data} = user?._doc ;
@@ -144,6 +146,8 @@ const login = asyncErrorHandler(async function (req, res,next) {
     res.cookie("jwt", token, {
       maxAge: 24*60*60*1000 ,
       httpOnly: true,
+       sameSite: 'None',
+      secure: process.env.NODE_ENV === 'production',
     });
     const {password : pwd,resetPasswordToken , resetPasswordExpiryTime,verificationToken,verificationTokenExpiryTime, verified, ...data} = user?._doc ;
     

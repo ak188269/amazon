@@ -22,6 +22,7 @@ const CartProvider = ({ children }) => {
     setCart(cartInLocalStorage)
   }
  }
+ // if user got logged in then send cart to server and remove from localstorage
  },[user]);
 
  const getPriceAndSizeOfLocalstorage = ()=>{

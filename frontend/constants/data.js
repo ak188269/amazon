@@ -6,22 +6,22 @@ const data = [
       images: [
         {
           navigate_to: "/products/lighting",
-          url: "https://i.dummyjson.com/data/products/96/1.jpg",
+          url: "/images/vertical_card/lighting/1.jpg",
           caption: "lighting ceiling kitchen",
         },
         {
           navigate_to: "/products/lighting",
-          url: "https://i.dummyjson.com/data/products/97/1.jpg",
+          url: "/images/vertical_card/lighting/2.jpg",
           caption: "Metal Ceramic Flower",
         },
         {
           navigate_to: "/products/lighting",
-          url: "https://i.dummyjson.com/data/products/99/1.jpg",
+          url: "/images/vertical_card/lighting/3.jpg",
           caption: "Wood Pendant Light",
         },
         {
           navigate_to: "/products/lighting",
-          url: "https://i.dummyjson.com/data/products/98/1.jpg",
+          url: "/images/vertical_card/lighting/4.jpg",
           caption: "combo of 3",
         },
       ],
@@ -60,22 +60,22 @@ const data = [
       images: [
         {
           navigate_to: "/products/home-decoration",
-          url: "https://i.dummyjson.com/data/products/26/1.jpg",
+          url: "/images/vertical_card/home_decoration/1.jpg",
           caption: "Plant Hanger For Home",
         },
         {
           navigate_to: "/products/home-decoration",
-          url: "https://i.dummyjson.com/data/products/27/1.jpg",
+          url: "/images/vertical_card/home_decoration/2.jpg",
           caption: "Flying Wooden Bird",
         },
         {
           navigate_to: "/products/home-decoration",
-          url: "https://i.dummyjson.com/data/products/28/1.jpg",
+          url: "/images/vertical_card/home_decoration/3.jpg",
           caption: "LED Lights",
         },
         {
           navigate_to: "/products/home-decoration",
-          url: "https://i.dummyjson.com/data/products/29/1.jpg",
+          url: "/images/vertical_card/home_decoration/4.jpg",
           caption: "Handcraft Chinese style",
         },
       ],
@@ -87,22 +87,22 @@ const data = [
       images: [
         {
           navigate_to: "/products/furniture",
-          url: "https://i.dummyjson.com/data/products/31/1.jpg",
+          url: "/images/vertical_card/furniture/1.jpg",
           caption: "Mornadi Velvet Bed",
         },
         {
           navigate_to: "/products/furniture",
-          url: "https://i.dummyjson.com/data/products/32/2.jpg",
+          url: "/images/vertical_card/furniture/2.jpg",
           caption: "Sofa for Coffe Cafe",
         },
         {
           navigate_to: "/products/furniture",
-          url: "https://i.dummyjson.com/data/products/33/3.jpg",
+          url: "/images/vertical_card/furniture/3.jpg",
           caption: "3 Tier Corner Shelves",
         },
         {
           navigate_to: "/products/furniture",
-          url: "https://i.dummyjson.com/data/products/34/1.jpg",
+          url: "/images/vertical_card/furniture/4.jpg",
           caption: "Plastic Table",
         },
       ],

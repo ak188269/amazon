@@ -65,7 +65,7 @@ notify("Error in payment try again later","error")
 
      {/* ---------- subtotal and proceed to checkout---- */}
      <div className={`flex flex-col gap-2 p-2 bg-[#F7F9FA] min-w-[200px] lg:pt-3 lg:w-[20%]`}>
-      <span className='text-xl lg:text-sm flex gap-1'>Subtotal <span className='hidden lg:block'>({cartSize} item)</span> : <span className={`font-semibold`}>₹{subTotal}</span></span>
+      <span className='text-xl lg:text-sm flex gap-1'>Subtotal <span className='hidden lg:block'>({cartSize} item)</span> : <span className={`font-semibold`}>₹{subTotal.toFixed(2)}</span></span>
        <button  className={`px-5 py-2 rounded-lg bg-[#FFD814] hover:bg-[#e8c30f] text-sm`} onClick={proceedToBuy}>Proceed to Buy <span className='lg:hidden'>( {cartSize} item )</span></button>
     </div>
 

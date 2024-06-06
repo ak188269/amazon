@@ -2,12 +2,20 @@ const asyncErrorHandler = require("../utils/asyncErrorHandler");
 const User = require("../models/user");
 const CustomError = require("../utils/customError");
 const Product = require("../models/product");
-
+const axios = require("axios")
 //  -------- this is just a function used to get id of product in mongodb because al the product are copied from dumyjson.com and they had their own id
 const getProductIdInMongodb = async (id)=>{
 
     const product = await Product.findOne({id : id});
-    if(!product) throw new CustomError("Error: Couldn't find product",404);
+    if(!product){
+        const productDetails = await axios.get(`https://dummyjson.com/product/${id}`) ;
+        if(!productDetails)
+        throw new CustomError("Error: Couldn't find product",404);
+    const productAddedToDatabase = await Product.create({
+        ...productDetails.data
+    })
+    return productAddedToDatabase._id ;
+    } 
     return product._id ;
 
 };
@@ -27,12 +35,16 @@ const addToCart = asyncErrorHandler(async (req ,res , next) => {
     if(productIndex !== -1){
         user.cart[productIndex].quantity += parseInt(quantity);
         await user.save();
-        return res.json({success: true, message:"Item added successfully"});
+        return res.json({success: true, message:"Item added successfully",data : {
+            cartSize : user.cart.length
+        }});
     }
 
     user.cart.unshift({productId , quantity});
     await user.save();
-    return res.json({success: true, message:"Item added successfully"});
+    return res.json({success: true, message:"Item added successfully",data : {
+        cartSize : user.cart.length
+    }});
 
 })
 
@@ -130,9 +142,10 @@ const getCartSize  = asyncErrorHandler( async (req ,  res  , next)=>{
     }
 
     // ------- else if use cart is not undefined ------
-    const size = user.cart.reduce((accumulator ,item)=>{
-      return   accumulator + item.quantity;
-    },0)
+    // const size = user.cart.reduce((accumulator ,item)=>{
+    //   return   accumulator + item.quantity;
+    // },0)
+    const size = user.cart.length;
     res.status(200).json({success : true , data : size});
 
 })
@@ -142,9 +155,10 @@ const getUserCart = asyncErrorHandler(async (req , res , next)=>{
     const subTotal = user.cart.reduce((accumulator ,item)=>{
       return   accumulator + item.quantity*item.productId.price*10 ; // price is multiplied by 10 alway this is followed everywhere as price mentioned in data was too less 
     },0)
-    const size = user.cart.reduce((accumulator ,item)=>{
-        return   accumulator + item.quantity;
-      },0)
+    // const size = user.cart.reduce((accumulator ,item)=>{
+    //     return   accumulator + item.quantity;
+    //   },0)
+    const size = user.cart.length;
     res.status(200).json({success : true , data : {items:user.cart , size : size ,subTotal:subTotal }});
 
 })

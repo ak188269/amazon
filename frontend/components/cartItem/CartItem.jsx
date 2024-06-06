@@ -51,7 +51,7 @@ const CartItem = ({item }) => {
 {/* ------ description of product -------- */}
 <div className='flex flex-col gap-2 w-[70%]'>
   <Link href={`/product/${product.id}`} className='text-xl'>{product?.title}</Link>
-  <span className='text-lg font-semibold'>₹{parseInt(10*product?.price)}</span>
+  <span className='text-lg font-semibold'>₹{parseInt(10*product?.price).toFixed(2)}</span>
   <span className='text-sm'>Eligible for FREE Shipping</span>
   <span className='hidden md:block'>{product?.description}</span>
   <span className='text-[green] text-xs'>In stock</span>

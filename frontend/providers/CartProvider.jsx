@@ -29,10 +29,10 @@ const CartProvider = ({ children }) => {
   const subTotal = cart.reduce((accumulator ,item)=>{
     return   accumulator + item.quantity*item.productId.price*10 ; // price is multiplied by 10 alway this is followed everywhere as price mentioned in data was too less 
   },0)
-  const size = cart.reduce((accumulator ,item)=>{
-      return   accumulator + item.quantity;
-    },0)
-
+  // const size = cart.reduce((accumulator ,item)=>{
+  //     return   accumulator + item.quantity;
+  //   },0)
+const size = cart.length;
     setSubTotal(subTotal);
     setCartSize(size);
    

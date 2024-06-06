@@ -42,14 +42,15 @@ const ProductCard = ({ product }) => {
   const addItemToCart = useCallback(async (url) => {
     // this url will tell whether it is add to cart or buy now 
     if (user) {
+      // setCartSize((size) => size + 1);
       const [response, error] = await addToCart(id, quantity);
+      
       if (error) {
-        notify("Error adding product try again", "error");
-        setCartSize((size) => size - quantity);
+        notify("Error adding product try again", error.message ??  error);
         return;
       }
       else{
-        setCartSize((size) => size + quantity);
+        setCartSize(response.data.cartSize);
       }
     } else if (!user) {
       const item = { productId: product, quantity: parseInt(quantity) };
@@ -67,10 +68,9 @@ const ProductCard = ({ product }) => {
         return tempCart;
       });
     }
-
     // setCartSize((size) => size + parseInt(quantity));
     notify("Added to cart", "success");
-    if(url)
+    if(url && typeof url === "string")
     router.push(url);
   });
 
@@ -137,7 +137,7 @@ const ProductCard = ({ product }) => {
 
           {/* -------------- price and discounted price------------- */}
           <span className="flex gap-2 items-center">
-            <span className=" text-2xl">₹{product?.price * 10}</span>
+            <span className=" text-2xl">₹{(parseFloat(product?.price) * 10).toFixed(2)}</span>
 
             {/* <span className="line-through text-gray-400">
               {" "}

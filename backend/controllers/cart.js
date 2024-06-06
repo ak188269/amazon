@@ -48,6 +48,7 @@ const addToCart = asyncErrorHandler(async (req ,res , next) => {
 
 })
 
+
 //this will be used when user first time logins and there is product in cart saved  in local storage
 const addToCartFromLocalstorage = asyncErrorHandler(async (req ,res , next) => {
     const {cart} = req.body ;
